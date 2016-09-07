@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Eco-Chicago: Michelle Harris</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    </head>
+    <body style="background-color:#fcfcfc">
+      <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header"><a class="navbar-brand" style="color:#6495ed">Eco-Chicago</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                </button>
+            </div>
+        </div>
+      </div>
+      <div class="jumbotron" style="background-color:#fcfcfc">
+        <img class="featurette-image img-responsive center-block" src="{{url_for('static', filename='Chicago.jpg')}}" alt="Chicago">
+      </div>
+      <div class="container">
+        <h2 style="color:#6495ed;">Targetting Regions for Reducing Energy Use</h2>
+        <div class="row featurette">
+          <div class="col-md-12">   
+            <p class="lead" style="color:#636363;">Welcome to Eco-Chicago! This site aims to identify neighborhoods and types of buildings in Chicago which use more electricity and/or gas. Click on the type of housing below to get started </p>
+          </div> 
+          <div>
+            <p> *Pretend there are some buttons and you pressed single family homes* </p>
+          </div>
+          <div class="col-md-12">
+            <img class="featurette-image img-responsive center-block" src="{{url_for('static', filename='figure_5.png')}}" alt="heatmap1">
+          </div> 
+          <div class="col-md-6">
+            <img class="featurette-image img-responsive center-block" src="{{url_for('static', filename='figure_6.png')}}" alt="heatmap1">
+          </div>
+          <div class="col-md-6">
+              <img class="featurette-image img-responsive center-block" src="{{url_for('static', filename='figure_7.png')}}" alt="heatmap2">
+          </div>        
+        </div>
+      </div>  
+    </body>
+</html>
