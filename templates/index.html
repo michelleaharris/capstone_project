@@ -1,44 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Eco-Chicago: Michelle Harris</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+{% extends 'base.html' %}
+{% block content %}
 
-    </head>
-    <body style="background-color:#fcfcfc">
-      <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header"><a class="navbar-brand" style="color:#6495ed">Eco-Chicago</a>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </button>
-            </div>
-        </div>
-      </div>
-      <div class="jumbotron" style="background-color:#fcfcfc">
-        <img class="featurette-image img-responsive center-block" src="{{url_for('static', filename='Chicago.jpg')}}" alt="Chicago">
-      </div>
-      <div class="container">
-        <h2 style="color:#6495ed;">Targetting Regions for Reducing Energy Use</h2>
-        <div class="row featurette">
-          <div class="col-md-12">   
-            <p class="lead" style="color:#636363;">Welcome to Eco-Chicago! This site aims to identify neighborhoods and types of buildings in Chicago which use more electricity and/or gas. Click on the type of housing below to get started </p>
-          </div> 
-          <div>
-            <p> *Pretend there are some buttons and you pressed single family homes* </p>
-          </div>
-          <div class="col-md-12">
-            <img class="featurette-image img-responsive center-block" src="{{url_for('static', filename='figure_5.png')}}" alt="heatmap1">
-          </div> 
-          <div class="col-md-6">
-            <img class="featurette-image img-responsive center-block" src="{{url_for('static', filename='figure_6.png')}}" alt="heatmap1">
-          </div>
-          <div class="col-md-6">
-              <img class="featurette-image img-responsive center-block" src="{{url_for('static', filename='figure_9.png')}}" alt="heatmap2">
-          </div>        
+      <div class="jumbotron" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/c/c4/Chicago_skyline,_viewed_from_John_Hancock_Center.jpg); background-size: cover; height: 600px">
+        <div class="container" style="margin-top: 150px">
+          <h1 style="color:#e8e8e8;" align="center"><strong>ECO-CHICAGO</strong></h1>
+          <div class="row featurette"; style="margin-top: 100px">
+            <h1 style="color:#e8e8e8;" align="center" style="margin-top: 100px">Projecting Energy Use to Assess Restrictions for a Sustainable Future</h1>
+          </div>  
         </div>
       </div>  
-    </body>
-</html>
+
+      <div class="container marketing">
+        <div class="row featurette">
+          <div class="col-md-4">
+            <h2 class="featurette-heading" style="color:#191970" align="center">Residential</h2>
+            <h3 class="featurette-heading" align="center" style="color:#191970">8,520,220,584 kWh/Year</h3>
+          </div>
+          <div class="col-md-4">
+            <h2 class="featurette-heading" style="color:#191970" align="center">Commercial</h2>
+            <h3 class="featurette-heading" align="center" style="color:#191970">5,712,004,990 kWh/Year</h3>
+          </div>
+          <div class="col-md-4">
+            <h2 class="featurette-heading" style="color:#191970" align="center">Industrial</h2>
+            <h3 class="featurette-heading" align="center" style="color:#191970"> 235,111,127 kWh/Year</h3>
+          </div>          
+          <div class="row featurette">
+            <div class="col-md-12"; style="margin-top: 80px">   
+              <h3 class="featurette-heading" style="color:#191970;">Welcome to Eco-Chicago! This site aims to project energy use for different types of buildings in Chicago to determine new limits for Green Energy Permits. Green Energy Permits incentivize constructing new buldings that include energy efficient and renewable energy features. To assure that Chicago is at the forefront of energy benchmarks to alleviate global climate change, it is necessary to detemine proper standards to reach these goals for 2020.</h3>
+            </div> 
+            <div class="col-md-12"; style="margin-top: 50px">   
+              <h3 class="featurette-heading" style="color:#191970;">Check out the pages for the different types of buldings to learn more.</h3>
+            </div>                  
+          </div> 
+        </div>                   
+      </div>  
+{% endblock %}
