@@ -6,17 +6,13 @@ app = Flask(__name__)
 def main():
   return render_template('index.html')
 
-@app.route('/residential')
+@app.route('/comparison')
 def res():
   return render_template('sfam.html')
 
-@app.route('/commercial')
+@app.route('/explore')
 def com():
   return render_template('com.html')
-
-@app.route('/industrial')
-def ind():
-  return render_template('ind.html')
 
 @app.errorhandler(404)
 def page_not_found(error):

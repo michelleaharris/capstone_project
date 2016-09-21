@@ -2,36 +2,42 @@
 {% block content %}
 
       <div class="jumbotron" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/c/c4/Chicago_skyline,_viewed_from_John_Hancock_Center.jpg); background-size: cover; height: 600px">
-        <div class="container" style="margin-top: 150px">
+        <div class="container" style="margin-top: 40px">
           <h1 style="color:#e8e8e8;" align="center"><strong>ECO-CHICAGO</strong></h1>
-          <div class="row featurette"; style="margin-top: 100px">
-            <h1 style="color:#e8e8e8;" align="center" style="margin-top: 100px">Projecting Energy Use to Assess Restrictions for a Sustainable Future</h1>
-          </div>  
         </div>
       </div>  
 
-      <div class="container marketing">
-        <div class="row featurette">
-          <div class="col-md-4">
-            <h2 class="featurette-heading" style="color:#191970" align="center">Residential</h2>
-            <h3 class="featurette-heading" align="center" style="color:#191970">8,520,220,584 kWh/Year</h3>
-          </div>
-          <div class="col-md-4">
-            <h2 class="featurette-heading" style="color:#191970" align="center">Commercial</h2>
-            <h3 class="featurette-heading" align="center" style="color:#191970">5,712,004,990 kWh/Year</h3>
-          </div>
-          <div class="col-md-4">
-            <h2 class="featurette-heading" style="color:#191970" align="center">Industrial</h2>
-            <h3 class="featurette-heading" align="center" style="color:#191970"> 235,111,127 kWh/Year</h3>
-          </div>          
-          <div class="row featurette">
-            <div class="col-md-12"; style="margin-top: 80px">   
-              <h3 class="featurette-heading" style="color:#191970;">Welcome to Eco-Chicago! This site aims to project energy use for different types of buildings in Chicago to determine new limits for Green Energy Permits. Green Energy Permits incentivize constructing new buldings that include energy efficient and renewable energy features. To assure that Chicago is at the forefront of energy benchmarks to alleviate global climate change, it is necessary to detemine proper standards to reach these goals for 2020.</h3>
-            </div> 
-            <div class="col-md-12"; style="margin-top: 50px">   
-              <h3 class="featurette-heading" style="color:#191970;">Check out the pages for the different types of buldings to learn more.</h3>
-            </div>                  
-          </div> 
-        </div>                   
-      </div>  
+    <div class="container marketing">
+      <div class="row featurette" style="margin-top: 50px">
+        <div class="col-md-7">
+          <h2 class="featurette-heading" style="color:#191970">Welcome to Eco-Chicago!</h2>
+          <p class="lead">I have used a database available through the city of Chicago which reports energy usage for buildings in 2010. Click <a href="https://data.cityofchicago.org/Environment-Sustainable-Development/Energy-Usage-2010/8yq3-m6wp">here</a> to check out the database. In my website, you can look up the predicted energy usage of your building and compare it to LEED energy efficiency standards for similar buildings. You also have the option to instead explore data yourself look at meaningful trends.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive center-block" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Flag_of_Chicago,_Illinois.svg/2000px-Flag_of_Chicago,_Illinois.svg.png" alt="Chicago Flag">
+        </div>
+      </div>
+
+      
+      <div class="row featurette" style="margin-top: 50px">
+        <div class="col-md-7 col-md-push-5">
+          <h2 class="featurette-heading" style="color:#191970">How do you match up to LEED?</h2>
+          <p class="lead">By implementing machine learning, my comparison calculator provides the average, minimum, and maxmimum energy use based on the neighborhood, size of the building complex, and age of the building. You can see a graph that compares these values to LEED energy use standards for similar energy-efficient buildings and calculates how much you could save yearly if your building became more energy efficient.</p>
+        </div>
+        <div class="col-md-5 col-md-pull-7">
+          <img class="featurette-image img-responsive center-block" src="https://upload.wikimedia.org/wikipedia/commons/6/6a/LEED_platinum_grey.jpg" alt="Leed">
+        </div>
+      </div>
+
+
+      <div class="row featurette" style="margin-top: 50px">
+        <div class="col-md-7">
+          <h2 class="featurette-heading" style="color:#191970">Curious about the data set?</h2>
+          <p class="lead"> Check out the explore page. You can choose among a number of features to compare the data and observe the trends yourself. I have subselected features that are useful or interesting that you can choose from to play around with the data. Click around and enjoy!</p>
+        </div>
+        <div class="col-md-5">
+            <img class="featurette-image img-responsive center-block" src="{{url_for('static', filename='figure_6.png')}}" alt="Graph" style = "height:400px">
+        </div>
+      </div>              
+    </div>  
 {% endblock %}
