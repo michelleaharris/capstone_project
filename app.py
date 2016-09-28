@@ -8,11 +8,11 @@ def main():
 
 @app.route('/comparison', methods=['GET','POST'])
 def res():
-  	if request.method == 'GET':
-		return render_template('sfam.html')
-	else:
-		app.vars['ticker'] = request.form['ticker'].upper()
-		return redirect('/graph')
+  if request.method == 'GET':
+    return render_template('sfam.html')
+  else:
+    app.vars['ticker'] = request.form['ticker'].upper()
+    return redirect('/graph')
 
 @app.route('/energymap')
 def com():
