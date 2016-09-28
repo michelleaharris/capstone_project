@@ -1,0 +1,60 @@
+path {
+  stroke-width: 1px;
+  stroke: white;
+  fill: #999;
+  cursor: pointer;
+}
+
+path.q0-10 {
+  fill: #053061;
+}
+
+path.q1-10 {
+  fill: #2166ac;
+}
+
+path.q2-10 {
+  fill: #4393c3;
+}
+
+path.q3-10 {
+  fill: #92c5de;
+}
+
+path.q4-10 {
+  fill: #d1e5f0;
+}
+
+path.q5-10 {
+  fill: #fddbc7;
+}
+
+path.q6-10 {
+  fill: #f4a582;
+}
+
+path.q7-10 {
+  fill: #d6604d;
+}
+
+path.q8-10 {
+  fill: #b2182b;
+}
+
+path.q9-10 {
+  fill: #67001f;
+}
+
+div.tooltippy {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  font-weight: bold;
+  padding: 4px 8px;
+  display: none;
+}
+
+svg {
+  border:1px solid white;
+}
