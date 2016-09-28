@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <div class="container marketing">
+	  <div class="row featurette" style="margin-top: 70px">
+	    <div class="col-md-12">
+	      <h2 class="featurette-heading" style="color:#191970" align="center">Comparison Calculator</h2>
+	      <p class="lead"> If you followed LEED energy efficiency standards, you would save on average $2143 a year compared to the average energy usage for your building.</p>
+	      <div id='chart'>
+		  	<svg style='height:500px'> </svg>
+		  </div><script src="{{url_for('static', filename='discreteBar.js')}}" type="text/javascript"> </script>
+
+  		</div>
+	  </div>
+  </div> 
+{% endblock %}

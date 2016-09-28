@@ -11,7 +11,6 @@ def res():
   if request.method == 'GET':
     return render_template('sfam.html')
   else:
-    app.vars['ticker'] = request.form['ticker'].upper()
     return redirect('/graph')
 
 @app.route('/energymap')
@@ -29,6 +28,7 @@ def viol():
 @app.route('/graph', methods=['GET'])
 def graph():
 	#Data into Pandas
+	'''
 	qurl = 'https://www.quandl.com/api/v3/datasets/WIKI/%s.json?column_index=4&start_date=2016-08-01&api_key=PbjyCkG1dayVcyLQx-si' % app.vars['ticker']
 	r = requests.get(qurl)
 	col = r.json()['dataset']['column_names']
@@ -42,9 +42,9 @@ def graph():
 	p.yaxis.axis_label = 'Closing Price'
 	p.line(datetime(df['Date']), df['Close'], color='#33A02C')
 
-	script, div = components(p)
+	script, div = components(p)'''
 
-	return render_template('graph.html',ticker=app.vars['ticker'], script=script, div=div)
+	return render_template('graph.html')
 
 @app.errorhandler(404)
 def page_not_found(error):
