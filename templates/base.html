@@ -12,10 +12,12 @@
         <script src="https://d3js.org/d3.v3.min.js"></script>
         <script src="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.js"></script>
         <link rel="stylesheet" href="https://cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css"/>
+        <script src="{{url_for('static', filename='crossfilter.js')}}"></script>
+        <script src="{{url_for('static', filename='dc.js')}}"></script>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='dc.css')}}"/>
         <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
         <link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-0.12.0.min.css" type="text/css"/>
         <script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-0.12.0.min.js"></script>
-        <script type="text/javascript">Bokeh.set_log_level("info");</script> 
         {% endblock %}
     </head>
     <body style="background-color:#e8e8e8">
@@ -34,8 +36,6 @@
                     <li><a href="/comparison">Comparison</a>
                     </li>
                     <li><a href="/explore">Explore</a>
-                    </li>
-                    <li><a href="/residential">Residential</a>
                     </li>
                 </ul>
             </div>
