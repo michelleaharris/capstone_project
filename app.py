@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
+import dill
 
 app = Flask(__name__)
+
+app.vars={}
 
 @app.route('/')
 def main():
@@ -9,46 +12,41 @@ def main():
 @app.route('/comparison', methods=['GET','POST'])
 def res():
   if request.method == 'GET':
-    return render_template('sfam.html')
+    return render_template('calc.html')
   else:
+    app.vars['age'] = float(request.form['age'])
+    app.vars['stories'] = float(request.form['stories'])
+    app.vars['occupied'] = float(request.form['occupied'])
+    app.vars['sqft'] = int(request.form['sqft'])
     return redirect('/graph')
 
 @app.route('/energymap')
 def com():
-  return render_template('com.html')
+  return render_template('map.html')
 
 @app.route('/explore')
 def ind():
-  return render_template('ind.html')
+  return render_template('explore.html')
 
-@app.route('/residential')
+@app.route('/violin')
 def viol():
   return render_template('violin.html')
 
 @app.route('/graph', methods=['GET'])
 def graph():
-	#Data into Pandas
-	'''
-	qurl = 'https://www.quandl.com/api/v3/datasets/WIKI/%s.json?column_index=4&start_date=2016-08-01&api_key=PbjyCkG1dayVcyLQx-si' % app.vars['ticker']
-	r = requests.get(qurl)
-	col = r.json()['dataset']['column_names']
-	data = r.json()['dataset']['data']
-	df = pd.DataFrame(data, columns=col)
-
-	#Bokeh plot
-	p = figure(x_axis_type="datetime", title="August 2016 Closing")
-	p.grid.grid_line_alpha=0.3
-	p.xaxis.axis_label = 'Date'
-	p.yaxis.axis_label = 'Closing Price'
-	p.line(datetime(df['Date']), df['Close'], color='#33A02C')
-
-	script, div = components(p)'''
-
-	return render_template('graph.html')
+  pipe = dill.load(open('pipe.pkl','rb'))
+  pipe_min = dill.load(open('pipe_min.pkl','rb'))
+  pipe_max = dill.load(open('pipe_max.pkl','rb'))
+  app.vars['avg'] = int(pipe.predict([[app.vars['stories'],app.vars['age'],app.vars['occupied']]])*10)
+  app.vars['min'] = int(pipe_min.predict([[app.vars['stories'],app.vars['age'],app.vars['occupied']]])*10)
+  app.vars['max'] = int(pipe_max.predict([[app.vars['stories'],app.vars['age'],app.vars['occupied']]])*10)
+  app.vars['money'] = int((app.vars['avg']-app.vars['min'])*0.06388)
+  return render_template('graph.html', avg=app.vars['avg'], 
+  	money=app.vars['money'], min=app.vars['min'], max=app.vars['max'])
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return 'Sorry, page not found', 404
+  return 'Sorry, page not found', 404
 
 
 

@@ -5,10 +5,54 @@
 	  <div class="row featurette" style="margin-top: 70px">
 	    <div class="col-md-12">
 	      <h2 class="featurette-heading" style="color:#191970" align="center">Comparison Calculator</h2>
-	      <p class="lead"> If you followed LEED energy efficiency standards, you would save on average $2143 a year compared to the average energy usage for your building.</p>
+	      <p class="lead"> If you followed LEED energy efficiency standards, you would save on average <strong>${{money}}<br></strong> a year compared to the average energy usage for your building. </p>
 	      <div id='chart'>
 		  	<svg style='height:500px'> </svg>
-		  </div><script src="{{url_for('static', filename='discreteBar.js')}}" type="text/javascript"> </script>
+		  </div>
+		  <script> 
+		  var avg = '{{avg}}';
+		  var min = '{{min}}';
+		  var max = '{{max}}';
+		  nv.addGraph(function() {
+		  var chart = nv.models.discreteBarChart()
+		      .x(function(d) { return d.label })    //Specify the data accessors.
+		      .y(function(d) { return d.value })
+		      .margin({left: 100})
+		      ;
+
+		  d3.select('#chart svg')
+		      .datum(exampleData())
+		      .call(chart);
+
+		  nv.utils.windowResize(chart.update);
+
+		  return chart;
+		});
+
+		//Each bar represents a single discrete quantity.
+		function exampleData() {
+		 return  [ 
+		    {
+		      key: "Cumulative Return",
+		      values: [
+		        { 
+		          "label" : "Minimum Yearly kWh" ,
+		          "value" : min
+		        } , 
+		        { 
+		          "label" : "Maximum Yearly kWh" , 
+		          "value" : max
+		        } , 
+		        { 
+		          "label" : "Average Yearly kWh" , 
+		          "value" : avg
+		        } 
+		      ]
+		    }
+		  ]
+
+		}
+		  </script>
 
   		</div>
 	  </div>

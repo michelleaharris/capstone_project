@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <div class="container marketing">
+	  <div class="row featurette" style="margin-top: 70px">
+	    <div class="col-md-12">
+	      <h2 class="featurette-heading" style="color:#191970" align="center">Explore Eco-Chicago!</h2>
+	      <p class="lead" > You want to know more? You came to the right place. Click around and explore!</p>
+	    </div>
+    </div>
+    <div class="row featurette">
+      <div class="col-md-12">  
+        <h3 class="featurette-heading" align="center">Comparing Energy Use to Socio-Economic Factors of Neighborhoods</h3>
+        <div id="thisplot">
+          <svg style='height:500px'> </svg>
+        </div>
+        <script>
+        d3.csv("{{ url_for('static', filename='data/Data.csv')}}", function(error, csv_data){
+            console.log(csv_data)
+                var nested_data = d3.nest()
+                    .key(function(d) { return d.group;; })
+                    .entries(csv_data);
+            
+        nv.addGraph(function() {
+            var chart = nv.models.scatterChart()
+                        .showDistX(true) 
+                        .showDistY(true)
+                .forceY([0,16000])
+                .forceX([0,100])
+                .useVoronoi(true)
+                .duration(500)
+                    .color(d3.scale.category10().range());
+            //Axis settings
+            chart.yAxis.axisLabel('Energy Use per Person (kWh/person)').axisLabelDistance(10);
+            chart.xAxis.tickFormat(d3.format('2f'));
+            chart.yAxis.tickFormat(d3.format('2,0f'));
+            //circle size
+            chart.pointRange([190,191]);
+            // TOOLTIP
+            chart.tooltip.contentGenerator(function(graph) {
+                /* console.log(graph); //examine the graph object in the console for more info */
+                return graph.point.country;
+            });
+            /* B: */
+            /* http://stackoverflow.com/questions/21532228/how-to-create-a-tooltip-with-custom-value */
+            /* chart.tooltip.contentGenerator(function (d) {
+               var ptIdx = d.pointIndex;
+               var serIdx = d.seriesIndex;
+               z = d.series[serIdx].values[ptIdx].country
+               return z;
+               }); */
+            chart.tooltip.duration(500);
+
+                
+            d3.select('#thisplot svg')
+                .datum(nested_data)
+                .transition().duration(200)
+                /* .attr("style", "outline: thin solid black;")  */
+                .call(chart);
+            nv.utils.windowResize(chart.update);
+            return chart;
+        });
+        });
+        </script>
+        <p class="lead" > The graph above shows the energy use per person in the neighborhoods in Chicago and compares that to different socio-economic factors collected during the census in 2010. The socio-economic factors are listed in the legend. The hardship index is a number from 1 to 100 that takes into account all of the previous values and the per capita income of the neighborhood. The more affluent a neighborhood, the lower the hardship index. Though I found no significant correlation between energy use and social status of the neighborhood, the data is still fun to explore and check out.</p>
+      </div>  
+	  </div>
+    <div class="row featurette">
+      <h3 align="center">Energy and Gas Use in Residential Buildings</h3>
+      <div class="col-md-6">
+        <h3 class="featurette-heading" align="center">Monthly Energy Use</h3>
+        <div id="emonth">
+          <svg style='height:500px'> </svg>
+        </div>
+        <script>
+        d3.csv("{{ url_for('static', filename='data/emonth.csv')}}", function(error, csv_data){
+            console.log(csv_data)
+                var nested_data = d3.nest()
+                    .key(function(d) { return d.group;; })
+                    .entries(csv_data);
+        /*These lines are all chart setup.  Pick and choose which chart features you want to utilize. */
+        nv.addGraph(function() {
+          var chart = nv.models.lineChart()
+                        .x(function(d) { return d.x })
+                        .y(function(d) { return d.y })
+                        .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+                        .forceY([0,13000])
+                        .forceX([1,12])
+                        .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+                        .duration(350)  //how fast do you want the lines to transition?
+                        .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+                        .showYAxis(true)        //Show the y-axis
+                        .showXAxis(true) 
+                               //Show the x-axis
+          ;
+
+          chart.xAxis     //Chart x-axis settings
+              .axisLabel('Month').axisLabelDistance(10)
+              .tickValues([1,2,3,4,5,6,7,8,9,10,11,12])
+              .tickFormat(d3.format(',r'));
+
+          chart.yAxis     //Chart y-axis settings
+              .axisLabel('Average Energy Use (kWh)')
+              .tickFormat(d3.format('.02f'));
+
+          /* Done setting the chart up? Time to render it!*/
+          var myData = nested_data   //You need data...
+
+          d3.select('#emonth svg')    //Select the <svg> element you want to render the chart in.   
+              .datum(myData)         //Populate the <svg> element with chart data...
+              .call(chart);          //Finally, render the chart!
+
+          //Update the chart when window resizes.
+          nv.utils.windowResize(function() { chart.update() });
+          return chart;
+        });
+        });
+        </script>
+      </div>
+      <div class="col-md-6">
+        <h3 class="featurette-heading" align="center">Monthly Gas Use</h3>
+        <div id="gmonth">
+          <svg style='height:500px'> </svg>
+        </div>
+        <script>
+        d3.csv("{{ url_for('static', filename='data/gmonth.csv')}}", function(error, csv_data){
+            console.log(csv_data)
+                var nested_data = d3.nest()
+                    .key(function(d) { return d.group;; })
+                    .entries(csv_data);
+        /*These lines are all chart setup.  Pick and choose which chart features you want to utilize. */
+        nv.addGraph(function() {
+          var chart = nv.models.lineChart()
+                        .x(function(d) { return d.x })
+                        .y(function(d) { return d.y })
+                        .margin({left: 100})  //Adjust chart margins to give the x-axis some breathing room.
+                        .forceY([0,3500])
+                        .forceX([1,12])
+                        .useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+                        .duration(350)  //how fast do you want the lines to transition?
+                        .showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+                        .showYAxis(true)        //Show the y-axis
+                        .showXAxis(true) 
+                               //Show the x-axis
+          ;
+
+          chart.xAxis     //Chart x-axis settings
+              .axisLabel('Month')
+              .tickValues([1,2,3,4,5,6,7,8,9,10,11,12])
+              .tickFormat(d3.format(',r'));
+
+          chart.yAxis     //Chart y-axis settings
+              .axisLabel('Average Gas Use (therms)')
+              .tickFormat(d3.format('.02f'));
+
+          /* Done setting the chart up? Time to render it!*/
+          var myData = nested_data   //You need data...
+
+          d3.select('#gmonth svg')    //Select the <svg> element you want to render the chart in.   
+              .datum(myData)         //Populate the <svg> element with chart data...
+              .call(chart);          //Finally, render the chart!
+
+          //Update the chart when window resizes.
+          nv.utils.windowResize(function() { chart.update() });
+          return chart;
+        });
+        });
+        </script>
+      </div>
+      <p class="lead" > The graphs above show the energy and gas use by month in 2010 for types of residential buidlings in the city of Chicago. The types of buildings are listed in the legend. Multi < 7 is multifamily homes with less than seven units, while Multi +7 are multifamily homes with seven or more units.</p>
+    </div>    
+  </div> 
+
+{% endblock %}

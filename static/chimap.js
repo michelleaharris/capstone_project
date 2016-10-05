@@ -26,7 +26,7 @@ var width = 491,
 	//Create choropleth scale
 	var color = d3.scale.quantize()
 	    .domain([7.449,13.146])
-	    .range(d3.range(10).map(function(i) { return "q" + i + "-10"; }));
+	    .range(d3.range(7).map(function(i) { return "q" + i + "-7"; }));
 
 	//Create zoom/pan listener
 	//Change [1,Infinity] to adjust the min/max zoom scale
@@ -71,7 +71,7 @@ var width = 491,
 
 
 	//Position of the tooltip relative to the cursor
-	var tooltipOffset = {x: 5, y: -25};
+	var tooltipOffset = {x: -70, y: -250};
 
 	//Create a tooltip, hidden at the start
 	function showTooltip(d) {
