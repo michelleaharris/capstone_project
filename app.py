@@ -9,6 +9,10 @@ app.vars={}
 def main():
   return render_template('index.html')
 
+@app.route('/energymap')
+def com():
+  return render_template('map.html')
+
 @app.route('/comparison', methods=['GET','POST'])
 def res():
   if request.method == 'GET':
@@ -19,19 +23,7 @@ def res():
     app.vars['occupied'] = float(request.form['occupied'])
     app.vars['sqft'] = int(request.form['sqft'])
     return redirect('/graph')
-
-@app.route('/energymap')
-def com():
-  return render_template('map.html')
-
-@app.route('/explore')
-def ind():
-  return render_template('explore.html')
-
-@app.route('/violin')
-def viol():
-  return render_template('violin.html')
-
+    
 @app.route('/graph', methods=['GET'])
 def graph():
   pipe = pickle.load(open('pipepick.pkl','rb'))
@@ -42,7 +34,14 @@ def graph():
   app.vars['max'] = int(pipe_max.predict([[app.vars['stories'],app.vars['age'],app.vars['occupied']]])*10)
   app.vars['money'] = int((app.vars['avg']-app.vars['min'])*0.06388)
   return render_template('graph.html', avg=app.vars['avg'], 
-  	money=app.vars['money'], min=app.vars['min'], max=app.vars['max'])
+    money=app.vars['money'], min=app.vars['min'], max=app.vars['max'])    
+
+
+@app.route('/explore')
+def ind():
+  return render_template('explore.html')
+
+
 
 @app.errorhandler(404)
 def page_not_found(error):
