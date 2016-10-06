@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-import dill
+import pickle
 
 app = Flask(__name__)
 
@@ -34,13 +34,13 @@ def viol():
 
 @app.route('/graph', methods=['GET'])
 def graph():
-  #pipe = dill.load(open('pipe.pkl','rb'))
-  #pipe_min = dill.load(open('pipe_min.pkl','rb'))
-  #pipe_max = dill.load(open('pipe_max.pkl','rb'))
-  app.vars['avg'] = int(305626) #int(pipe.predict([[app.vars['stories'],app.vars['age'],app.vars['occupied']]])*10)
-  app.vars['min'] = int(235914) #int(pipe_min.predict([[app.vars['stories'],app.vars['age'],app.vars['occupied']]])*10)
-  app.vars['max'] = int(415366) #int(pipe_max.predict([[app.vars['stories'],app.vars['age'],app.vars['occupied']]])*10)
-  app.vars['money'] = int(4453)#int((app.vars['avg']-app.vars['min'])*0.06388)
+  pipe = pickle.load(open('pipepick.pkl','rb'))
+  pipe_min = pickle.load(open('pipepick_min.pkl','rb'))
+  pipe_max = pickle.load(open('pipepick_max.pkl','rb'))
+  app.vars['avg'] = int(pipe.predict([[app.vars['stories'],app.vars['age'],app.vars['occupied']]])*10)
+  app.vars['min'] = int(pipe_min.predict([[app.vars['stories'],app.vars['age'],app.vars['occupied']]])*10)
+  app.vars['max'] = int(pipe_max.predict([[app.vars['stories'],app.vars['age'],app.vars['occupied']]])*10)
+  app.vars['money'] = int((app.vars['avg']-app.vars['min'])*0.06388)
   return render_template('graph.html', avg=app.vars['avg'], 
   	money=app.vars['money'], min=app.vars['min'], max=app.vars['max'])
 
