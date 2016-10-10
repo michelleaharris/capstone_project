@@ -10,11 +10,11 @@ def main():
   return render_template('index.html')
 
 @app.route('/energymap')
-def com():
+def map():
   return render_template('map.html')
 
 @app.route('/comparison', methods=['GET','POST'])
-def res():
+def comp():
   if request.method == 'GET':
     return render_template('calc.html')
   else:
@@ -23,7 +23,7 @@ def res():
     app.vars['occupied'] = float(request.form['occupied'])
     app.vars['sqft'] = int(request.form['sqft'])
     return redirect('/graph')
-    
+
 @app.route('/graph', methods=['GET'])
 def graph():
   pipe = pickle.load(open('pipepick.pkl','rb'))
@@ -37,8 +37,12 @@ def graph():
     money=app.vars['money'], min=app.vars['min'], max=app.vars['max'])    
 
 
+@app.route('/techniques')
+def tech():
+  return render_template('techniques.html')
+
 @app.route('/explore')
-def ind():
+def exp():
   return render_template('explore.html')
 
 
@@ -51,5 +55,4 @@ def page_not_found(error):
 
 
 if __name__ == '__main__':
-  app.debug = True
   app.run(port=33507)

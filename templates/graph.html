@@ -13,11 +13,16 @@
 		  var avg = '{{avg}}';
 		  var min = '{{min}}';
 		  var max = '{{max}}';
+		  var moon = ["#a02c2d","#97BDB5","#BDBD39"];
+	        d3.scale.moon = function() {
+	            return d3.scale.ordinal().range(moon);
+	        }; 
 		  nv.addGraph(function() {
 		  var chart = nv.models.discreteBarChart()
 		      .x(function(d) { return d.label })    //Specify the data accessors.
 		      .y(function(d) { return d.value })
 		      .margin({left: 100})
+		      .color(d3.scale.moon().range()); 
 		      ;
 
 		  d3.select('#chart svg')
